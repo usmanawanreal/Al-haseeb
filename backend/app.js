@@ -26,6 +26,15 @@ function createApp() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
 
+  app.get('/', (_req, res) => {
+    res.json({
+      service: 'Al-Haseeb API',
+      status: 'running',
+      health: '/api/health',
+      hint: 'This is the backend. Open your frontend URL for the website.',
+    });
+  });
+
   app.get('/api/health', (_req, res) => {
     res.json({ ok: true, service: 'al-haseeb-api' });
   });
