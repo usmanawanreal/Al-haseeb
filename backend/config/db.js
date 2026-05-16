@@ -24,6 +24,9 @@ const connectDB = async () => {
       .connect(uri, {
         bufferCommands: false,
         maxPoolSize: 10,
+        serverSelectionTimeoutMS: 10000,
+        connectTimeoutMS: 10000,
+        socketTimeoutMS: 20000,
       })
       .then((mongooseInstance) => {
         console.log(`MongoDB Connected: ${mongooseInstance.connection.host}`);

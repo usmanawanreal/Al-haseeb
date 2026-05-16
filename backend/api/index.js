@@ -1,18 +1,14 @@
 const serverless = require('serverless-http');
 const { createApp } = require('../app');
-const connectDB = require('../config/db');
-const { ensureDefaultAccounts } = require('../seed/ensureDefaultAccounts');
-const { ensureDefaultServices } = require('../seed/ensureDefaultServices');
+const { runStartupWithTimeout } = require('../lib/runStartup');
 
 let handler;
 let initPromise;
 
 async function initialize() {
-  await connectDB();
-  await ensureDefaultAccounts();
-  await ensureDefaultServices();
+  await runStartupWithTimeout();
   const app = createApp();
-  handler = serverless(app);
+  handler = serverless(app, { binary: false });
 }
 
 module.exports = async (req, res) => {
@@ -28,8 +24,12 @@ module.exports = async (req, res) => {
     return handler(req, res);
   } catch (err) {
     console.error('[api] Initialization failed:', err.message);
-    res.status(503).json({
-      message: 'API is starting or misconfigured. Check MONGO_URI and environment variables.',
-    });
+    if (!res.headersSent) {
+      res.status(503).json({
+        message:
+          'API could not start. Check MONGO_URI (Atlas IP allowlist 0.0.0.0/0), JWT_SECRET, and Vercel env vars.',
+        detail: process.env.NODE_ENV === 'production' ? undefined : err.message,
+      });
+    }
   }
 };

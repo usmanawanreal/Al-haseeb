@@ -31,7 +31,7 @@ async function ensureDefaultAccounts() {
         email,
         fullName: process.env.ADMIN_FULL_NAME || 'Administrator',
         password,
-        role: 'SuperAdmin'
+        role: 'SuperAdmin',
       });
       console.log(`[ensureDefaultAccounts] Admin user created: ${email}`);
       return;
@@ -44,6 +44,10 @@ async function ensureDefaultAccounts() {
       return;
     }
 
+    if (process.env.ADMIN_FORCE_SYNC !== 'true') {
+      return;
+    }
+
     existing.username = email;
     existing.email = email;
     existing.password = password;
@@ -52,7 +56,7 @@ async function ensureDefaultAccounts() {
       existing.fullName = process.env.ADMIN_FULL_NAME.trim();
     }
     await existing.save();
-    console.log(`[ensureDefaultAccounts] Admin user synced from .env: ${email}`);
+    console.log(`[ensureDefaultAccounts] Admin user synced (ADMIN_FORCE_SYNC): ${email}`);
   } catch (e) {
     console.error('[ensureDefaultAccounts]', e.message);
   }
