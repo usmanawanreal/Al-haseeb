@@ -7,13 +7,13 @@ const USER_KEY = 'adminUser';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 15000,
+  timeout: 30000,
 });
 
 /** Public API calls (no auth) — avoids attaching patient or admin tokens. */
 export const publicApi = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 15000,
+  timeout: 30000,
 });
 
 export const getToken = () => localStorage.getItem(TOKEN_KEY);

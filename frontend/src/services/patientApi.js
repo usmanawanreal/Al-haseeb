@@ -7,7 +7,7 @@ export const PATIENT_USER_KEY = 'patientUser';
 
 const patientApi = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 15000,
+  timeout: 30000,
 });
 
 export const getPatientToken = () => localStorage.getItem(PATIENT_TOKEN_KEY);
