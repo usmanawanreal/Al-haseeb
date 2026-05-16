@@ -72,7 +72,7 @@ export const verifyForgotPasswordOtp = (payload) =>
 export const resetForgotPassword = (payload) =>
   publicApi.post('/auth/forgot-password/reset', payload);
 
-export const adminLogin = (credentials) => api.post('/admin/login', credentials);
+export const adminLogin = (credentials) => publicApi.post('/admin/login', credentials);
 export const fetchDashboardStats = () => api.get('/dashboard/stats');
 export const fetchRecentActivity = () => api.get('/dashboard/recent-activity');
 

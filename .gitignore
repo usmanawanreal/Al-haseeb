@@ -79,3 +79,10 @@ env/
 *.temp
 .cache/
 _docx_extract/
+
+# --- Removed / legacy (not used by Vite app + Express API) ---
+admin/
+legacy_static/
+report/
+.dist/
+.sixth/

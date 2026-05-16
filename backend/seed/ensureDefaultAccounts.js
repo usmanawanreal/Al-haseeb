@@ -5,9 +5,20 @@ const User = require('../models/User');
  * Set ADMIN_EMAIL and ADMIN_PASSWORD in `.env` (recommended — avoids hardcoding secrets).
  */
 async function ensureDefaultAccounts() {
-  // Defaults match project admin; override with ADMIN_EMAIL / ADMIN_PASSWORD in .env
-  const email = (process.env.ADMIN_EMAIL || 'ua8241@gmail.com').trim().toLowerCase();
-  const password = process.env.ADMIN_PASSWORD || '12345654321uU';
+  const isProduction = process.env.NODE_ENV === 'production' || process.env.VERCEL === '1';
+  const email = (
+    process.env.ADMIN_EMAIL || (isProduction ? '' : 'ua8241@gmail.com')
+  )
+    .trim()
+    .toLowerCase();
+  const password = process.env.ADMIN_PASSWORD || (isProduction ? '' : '12345654321uU');
+
+  if (!email || !password) {
+    console.warn(
+      '[ensureDefaultAccounts] Skipped — set ADMIN_EMAIL and ADMIN_PASSWORD in Vercel/backend env.'
+    );
+    return;
+  }
 
   try {
     const existing = await User.findOne({
