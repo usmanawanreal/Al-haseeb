@@ -1,0 +1,81 @@
+# --- Dependencies ---
+node_modules/
+
+# --- Environment & secrets (keep *.example) ---
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# --- Frontend build (Vite) ---
+frontend/dist/
+frontend/dist-ssr/
+*.local
+
+# --- Backend / deploy ---
+.vercel/
+backend/.vercel/
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- Test & coverage ---
+coverage/
+.nyc_output/
+
+# --- OS ---
+.DS_Store
+.DS_Store?
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Editors & IDEs ---
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# --- LaTeX (business plan) ---
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.xdv
+# Keep main .log optional — uncomment next line to ignore LaTeX logs:
+# Al-Hasseb_Business_Plan.log
+
+# --- Python (scaffold / utility scripts) ---
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+env/
+
+# --- Misc local / temp ---
+*.tmp
+*.temp
+.cache/
+_docx_extract/

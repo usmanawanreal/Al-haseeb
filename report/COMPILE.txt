@@ -1,0 +1,46 @@
+================================================================================
+WHY "pdflatex is not recognized"
+================================================================================
+Windows does not include LaTeX. You must install a distribution (MiKTeX or TeX Live).
+Then open a NEW PowerShell window and run pdflatex again.
+
+================================================================================
+OPTION A — Install MiKTeX (recommended on Windows)
+================================================================================
+1) Install using Winget (PowerShell as Administrator often helps):
+
+   winget install MiKTeX.MiKTeX --accept-package-agreements --accept-source-agreements
+
+   OR download the installer from: https://miktex.org/download
+
+2) During MiKTeX setup, choose "Install missing packages on-the-fly" = Yes (recommended).
+
+3) Close and reopen PowerShell so PATH updates.
+
+4) Build your PDF:
+
+   cd "D:\Semester 8\EBM\Project ebm\Al-haseeb\report"
+   pdflatex main.tex
+   pdflatex main.tex
+
+5) If pdflatex still fails, MiKTeX bin is usually:
+
+   C:\Users\<YOU>\AppData\Local\Programs\MiKTeX\miktex\bin\x64\
+
+   Add that folder to System PATH (Environment Variables), then reopen PowerShell.
+
+================================================================================
+OPTION B — No install: Overleaf (browser)
+================================================================================
+1) Go to https://www.overleaf.com (free account).
+2) New Project -> Upload Project -> zip this "report" folder (main.tex + COMPILE.txt).
+3) Click Recompile; download PDF.
+
+Note: Overleaf already includes Times-like fonts; mathptmx works there.
+
+================================================================================
+OPTION C — TeX Live
+================================================================================
+Large download; advanced users: https://tug.org/texlive/windows.html
+
+================================================================================
