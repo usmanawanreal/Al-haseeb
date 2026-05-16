@@ -1,18 +1,15 @@
 const serverless = require('serverless-http');
 const { createApp } = require('../app');
-const { runStartupWithTimeout } = require('../lib/runStartup');
+const { connectDatabase, runSeedsInBackground } = require('../lib/runStartup');
 
 let handler;
 let initPromise;
 
-function requestPath(req) {
-  return (req.url || '').split('?')[0];
-}
-
 async function initialize() {
-  await runStartupWithTimeout();
+  await connectDatabase();
   const app = createApp();
   handler = serverless(app, { binary: false });
+  runSeedsInBackground();
 }
 
 function getInitPromise() {
@@ -28,7 +25,7 @@ function getInitPromise() {
 module.exports = async (req, res) => {
   try {
     await getInitPromise();
-    return handler(req, res);
+    return await handler(req, res);
   } catch (err) {
     console.error('[api] Initialization failed:', err.message);
     if (!res.headersSent) {

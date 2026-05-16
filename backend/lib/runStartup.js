@@ -13,14 +13,29 @@ function withTimeout(promise, ms, label) {
   ]);
 }
 
-async function runStartup() {
-  await connectDB();
+async function connectDatabase() {
+  return withTimeout(connectDB(), STARTUP_TIMEOUT_MS, 'MongoDB connection');
+}
+
+async function runSeeds() {
   await ensureDefaultAccounts();
   await ensureDefaultServices();
 }
 
-async function runStartupWithTimeout() {
-  return withTimeout(runStartup(), STARTUP_TIMEOUT_MS, 'API startup (MongoDB / seed)');
+let seedsStarted = false;
+
+function runSeedsInBackground() {
+  if (seedsStarted) return;
+  seedsStarted = true;
+  runSeeds().catch((err) => {
+    console.error('[runStartup] Seed error:', err.message);
+    seedsStarted = false;
+  });
 }
 
-module.exports = { runStartup, runStartupWithTimeout, STARTUP_TIMEOUT_MS };
+module.exports = {
+  connectDatabase,
+  runSeeds,
+  runSeedsInBackground,
+  STARTUP_TIMEOUT_MS,
+};

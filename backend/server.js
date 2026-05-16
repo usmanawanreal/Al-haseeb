@@ -2,7 +2,7 @@
  * Local development only. Vercel uses api/index.js (serverless) — never app.listen() on Vercel.
  */
 const { createApp } = require('./app');
-const { runStartup } = require('./lib/runStartup');
+const { connectDatabase, runSeeds } = require('./lib/runStartup');
 
 const PORT = process.env.PORT || 5000;
 
@@ -11,7 +11,8 @@ if (process.env.VERCEL) {
 } else {
   (async () => {
     try {
-      await runStartup();
+      await connectDatabase();
+      await runSeeds();
       const app = createApp();
       app.listen(PORT, () => {
         console.log(`Server running on port ${PORT}`);
