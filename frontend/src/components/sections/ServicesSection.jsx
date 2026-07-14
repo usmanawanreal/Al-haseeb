@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getActiveServices } from '../../services/api';
 import { useLanguage } from '../../context/LanguageContext';
-import { formatServicePrice, localizeService } from '../../i18n/serviceTranslations';
+import { localizeService } from '../../i18n/serviceTranslations';
 
 const FALLBACK_SERVICES = [
   { _id: 'static-1', icon: 'bi-capsule', title: 'Injections', description: 'IM, IV, and SC injections administered safely at home by trained professionals.' },
@@ -60,27 +60,25 @@ export default function ServicesSection() {
         <h2 className="section-title fade-up">{t('sections', 'servicesTitle')}</h2>
         <p className="section-desc fade-up">{t('sections', 'servicesDesc')}</p>
         <div className="row g-4">
-          {displayServices.map((s) => {
+          {displayServices.map((s, index) => {
             const icon = s.icon || 'bi-heart-pulse';
             const isEmergency =
               s.emergency || (s.title && String(s.title).toLowerCase().includes('emergency'));
-            const iconStyle = isEmergency ? { background: '#fecaca', color: '#dc2626' } : undefined;
             return (
               <ServiceCard
                 key={s._id || s.title}
                 icon={icon}
-                iconStyle={iconStyle}
+                isEmergency={isEmergency}
                 title={s.title}
                 description={s.description}
-                basePrice={s.basePrice}
-                lang={lang}
+                index={index}
               />
             );
           })}
         </div>
-        <div className="mt-4 fade-up">
+        <div className="mt-5 fade-up">
           <Link to="/booking" className="btn-primary-custom">
-            <i className="bi bi-arrow-right" /> {t('sections', 'bookService')}
+            {t('sections', 'bookService')} <i className="bi bi-arrow-right" />
           </Link>
         </div>
       </div>
@@ -88,18 +86,19 @@ export default function ServicesSection() {
   );
 }
 
-function ServiceCard({ icon, iconStyle, title, description, basePrice, lang }) {
+function ServiceCard({ icon, isEmergency, title, description, index }) {
   return (
-    <div className="col-6 col-lg-4 fade-up">
-      <div className="service-card">
-        <div className="icon-box" style={iconStyle}>
+    <div className="col-6 col-lg-4 fade-up" style={{ animationDelay: `${index * 90}ms` }}>
+      <div className={`service-card${isEmergency ? ' service-card--emergency' : ''}`}>
+        <div className="service-card__glow" aria-hidden="true" />
+        <div className="icon-box">
           <i className={`bi ${icon}`} />
         </div>
         <h5>{title}</h5>
         <p>{description}</p>
-        {typeof basePrice === 'number' && (
-          <p className="text-muted small mb-0 ltr-num">{formatServicePrice(basePrice, lang)}</p>
-        )}
+        <span className="service-card__link">
+          {isEmergency ? 'Available now' : 'Learn more'} <i className="bi bi-arrow-right" />
+        </span>
       </div>
     </div>
   );
