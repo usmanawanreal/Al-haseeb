@@ -5,6 +5,7 @@ import { getActiveServices, submitAppointment } from '../services/api';
 import { usePatientAuth } from '../hooks/usePatientAuth';
 import { useLanguage } from '../context/LanguageContext';
 import { localizeBookingApiMessage } from '../utils/authMessages';
+import Seo from '../components/Seo';
 
 export default function Booking() {
   const { lang, t } = useLanguage();
@@ -110,6 +111,11 @@ export default function Booking() {
 
   return (
     <div className="page-with-fixed-nav public-form-page">
+      <Seo
+        title="Book a Home Healthcare Appointment"
+        description="Book a certified home healthcare visit in Shakargarh & Narowal — injections, wound care, IV drips, blood sampling, and emergency visits, scheduled online in minutes."
+        path="/booking"
+      />
       <div className="container py-5">
         <h1>{t('booking', 'title')}</h1>
         <p className="section-desc" style={{ marginBottom: '1rem' }}>

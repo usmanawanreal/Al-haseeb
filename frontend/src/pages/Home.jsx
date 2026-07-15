@@ -6,6 +6,8 @@ import AboutSection from '../components/sections/AboutSection';
 import ServicesSection from '../components/sections/ServicesSection';
 import PricingSection from '../components/sections/PricingSection';
 import ContactSection from '../components/sections/ContactSection';
+import Seo from '../components/Seo';
+import drHaseebPhoto from '../assets/dr-haseeb-optimized.webp';
 import {
   CLINIC_PHONE_DISPLAY,
   CLINIC_PHONE_TEL_HREF,
@@ -14,9 +16,6 @@ import {
   CLINIC_MAILTO_HREF,
   whatsAppHref,
 } from '../constants/clinicContact';
-
-const HERO_IMG =
-  'https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=600&h=450&fit=crop&q=75';
 
 export default function Home() {
   const { t } = useLanguage();
@@ -38,6 +37,11 @@ export default function Home() {
 
   return (
     <>
+      <Seo
+        title="Home Healthcare in Shakargarh & Narowal"
+        description="Certified 24/7 home healthcare in Shakargarh & Narowal by Al-Haseeb Medical Health Care Center — injections, wound care, IV drips, blood sampling, and emergency home visits led by Dr. Haseeb."
+        path="/"
+      />
       <section className="hero" id="hero">
         <div className="container">
           <div className="row align-items-center">
@@ -98,16 +102,21 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="col-lg-6 d-none d-lg-block">
+            <div className="col-12 col-lg-6 order-first order-lg-last">
               <div className="hero-img-wrapper text-center">
+                <div className="hero-portrait-ring" aria-hidden="true" />
                 <img
-                  src={HERO_IMG}
-                  alt="Home Healthcare Professional"
-                  width={540}
-                  height={405}
+                  src={drHaseebPhoto}
+                  alt="H/Dr. Haseeb Ali Arif — Founder, Al-Haseeb Medical Health Care Center"
+                  width={900}
+                  height={1125}
                   loading="eager"
-                  className="hero-main-img"
+                  className="hero-main-img hero-portrait-img"
                 />
+                <div className="hero-doctor-caption">
+                  <strong>H/Dr. Haseeb Ali Arif</strong>
+                  <span>DHMS (Punjab), RHMP (Pak)</span>
+                </div>
                 <div className="hero-float-card card-1">
                   <i className="bi bi-shield-check text-success" /> {t('hero', 'floatStaff')}
                 </div>

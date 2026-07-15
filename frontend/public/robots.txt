@@ -1,0 +1,10 @@
+# https://alhaseebmedical.com/robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /my-appointments
+
+Sitemap: https://alhaseebmedical.com/sitemap.xml

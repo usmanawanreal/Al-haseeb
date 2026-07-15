@@ -10,6 +10,7 @@ import {
   resetForgotPassword,
 } from '../services/api';
 import { localizeAuthApiMessage } from '../utils/authMessages';
+import Seo from '../components/Seo';
 
 const ADMIN_ROLES = ['Admin', 'SuperAdmin'];
 
@@ -117,6 +118,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="page-with-fixed-nav auth-page">
+      <Seo title="Reset Your Password" path="/forgot-password" noindex />
       <div className="container py-5 auth-flow-card" style={{ maxWidth: 480 }}>
         <h1 className="h2 mb-2">{t('auth', 'forgotTitle')}</h1>
         <p className="section-desc" style={{ marginBottom: '1.5rem' }}>

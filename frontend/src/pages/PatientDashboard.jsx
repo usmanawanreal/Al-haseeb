@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { fetchMyAppointmentStats, fetchMyAppointments } from '../services/patientApi';
 import { usePatientAuth } from '../hooks/usePatientAuth';
 import { useLanguage } from '../context/LanguageContext';
+import Seo from '../components/Seo';
 
 function badgeClass(status) {
   const s = (status || '').toLowerCase();
@@ -70,6 +71,7 @@ export default function PatientDashboard() {
 
   return (
     <div className="page-with-fixed-nav public-form-page">
+      <Seo title="My Appointments" path="/my-appointments" noindex />
       <div className="container py-5">
         <div className="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
           <div>

@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { usePatientAuth } from '../hooks/usePatientAuth';
 import { useLanguage } from '../context/LanguageContext';
 import { localizeAuthApiMessage } from '../utils/authMessages';
+import Seo from '../components/Seo';
 
 export default function Signup() {
   const { lang, t } = useLanguage();
@@ -47,6 +48,7 @@ export default function Signup() {
 
   return (
     <div className="page-with-fixed-nav auth-page">
+      <Seo title="Create a Patient Account" path="/signup" noindex />
       <div className="container py-5 auth-flow-card" style={{ maxWidth: 480 }}>
         <h1 className="h2 mb-2">{t('auth', 'signupTitle')}</h1>
         <p className="section-desc" style={{ marginBottom: '1.5rem' }}>

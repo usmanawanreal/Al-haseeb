@@ -10,6 +10,10 @@
     />
     <meta name="theme-color" content="#7c3aed" />
     <title>Al-Haseeb Medical Health Care Center — Home Healthcare Shakargarh</title>
+    <!-- Per-route <title>/<meta description>/canonical/OG tags are set by the <Seo> component
+         (frontend/src/components/Seo.jsx) using React 19's native document metadata support.
+         The tags above are the fallback shown before JS runs / to crawlers that don't execute it. -->
+    <link rel="canonical" href="https://alhaseebmedical.com/" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,6 +28,47 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
       rel="stylesheet"
     />
+    <!-- LocalBusiness / MedicalBusiness structured data — tells Google this is a local
+         healthcare provider so it can show rich results / local pack listings.
+         Update address/phone/hours here if clinic details change. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MedicalBusiness",
+        "name": "Al-Haseeb Medical Health Care Center",
+        "alternateName": "Al-Haseeb Medical Health Care Center SKG",
+        "description": "Certified 24/7 home healthcare services in Shakargarh & Narowal — injections, wound care, IV drip therapy, blood sampling, and emergency home visits.",
+        "url": "https://alhaseebmedical.com/",
+        "telephone": "+923088053238",
+        "email": "alhaseebmedicalskg@gmail.com",
+        "priceRange": "PKR",
+        "image": "https://alhaseebmedical.com/og-cover.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Shakargarh",
+          "addressRegion": "Punjab",
+          "addressCountry": "PK"
+        },
+        "areaServed": [
+          { "@type": "City", "name": "Shakargarh" },
+          { "@type": "City", "name": "Narowal" }
+        ],
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "H/Dr. Haseeb Ali Arif",
+          "honorificSuffix": "DHMS (Punjab), RHMP (Pak)"
+        },
+        "sameAs": []
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

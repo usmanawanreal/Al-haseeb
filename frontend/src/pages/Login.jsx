@@ -6,6 +6,7 @@ import { usePatientAuth } from '../hooks/usePatientAuth';
 import { useLanguage } from '../context/LanguageContext';
 import { unifiedLogin } from '../services/api';
 import { localizeAuthApiMessage } from '../utils/authMessages';
+import Seo from '../components/Seo';
 
 const ADMIN_ROLES = ['Admin', 'SuperAdmin'];
 
@@ -81,6 +82,7 @@ export default function Login() {
 
   return (
     <div className="page-with-fixed-nav auth-page">
+      <Seo title="Patient Login" path="/login" noindex />
       <div className="container py-5 auth-flow-card" style={{ maxWidth: 480 }}>
         <h1 className="h2 mb-2">{t('auth', 'loginTitle')}</h1>
         <p className="section-desc" style={{ marginBottom: '1.5rem' }}>
